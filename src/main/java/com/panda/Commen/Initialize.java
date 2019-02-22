@@ -4,6 +4,8 @@ import io.appium.java_client.AppiumDriver;
 
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
+
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.BeforeSuite;
@@ -24,8 +26,10 @@ public class Initialize {
 	}
 	@BeforeSuite
 	public static void Androidsetting() {
-		String deviceName = "/Users/huangling/Documents/soft/android-sdk-macosx/platform-tools/adb shell getprop ro.product.model";
-		String deviceVersion="/Users/huangling/Documents/soft/android-sdk-macosx/platform-tools/adb shell getprop ro.build.version.release";
+		//String deviceName = "/Users/huangling/Documents/soft/android-sdk-macosx/platform-tools/adb shell getprop ro.product.model";
+		//String deviceVersion="/Users/huangling/Documents/soft/android-sdk-macosx/platform-tools/adb shell getprop ro.build.version.release";
+		String deviceName = "adb shell getprop ro.product.model";
+		String deviceVersion="adb shell getprop ro.build.version.release";
 		// 设置apk的路径
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "Application");
@@ -46,6 +50,7 @@ public class Initialize {
 		capabilities.setCapability("sessionOverride", true);
 		capabilities.setCapability("appPackage", Control.get("AndappPackage"));
 		capabilities.setCapability("appActivity", Control.get("AndappActivity"));
+	
 		// 初始化
 		try {
 			androiddriver = new AndroidDriver(new URL(Control.get("base_url")), capabilities);

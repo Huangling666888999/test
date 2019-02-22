@@ -81,10 +81,9 @@ public class BaseAction {
     public static WebElement findElement(AppiumDriver driver,String value){
         String string[]=value.split("\\|");
         WebElement element=null;
-        System.out.println("66666666"+value);
-
         if(string[1].equals("id")){
              element=driver.findElement(By.id(string[0]));
+             System.out.println("66666666"+value);
         }
         if (string[1].equals("name")){
              element=driver.findElement(By.name(string[0]));

@@ -1,10 +1,10 @@
 package com.panda.Commen;
 
 import io.appium.java_client.AppiumDriver;
-
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -34,7 +34,7 @@ public class Initialize {
 		File classpathRoot = new File(System.getProperty("user.dir"));
 		File appDir = new File(classpathRoot, "Application");
 		File app = new File(appDir, "PandaTV.apk");
-		Map<String, String> Control = SystemUtils.getPropertyMap("Config/ini.properties");
+		Map<String, String> Control = SystemUtils.getPropertyMap("Config/config.properties");
 		// 设置自动化相关参数
 		DesiredCapabilities capabilities = new DesiredCapabilities();
 		capabilities.setCapability(CapabilityType.BROWSER_NAME, "");
@@ -50,10 +50,15 @@ public class Initialize {
 		capabilities.setCapability("sessionOverride", true);
 		capabilities.setCapability("appPackage", Control.get("AndappPackage"));
 		capabilities.setCapability("appActivity", Control.get("AndappActivity"));
-	
+		capabilities.setCapability("automationName", "uiautomator2");
+		capabilities.setCapability("noReset", true);
 		// 初始化
 		try {
 			androiddriver = new AndroidDriver(new URL(Control.get("base_url")), capabilities);
+			//System.out.println("2222"+androiddriver.getPageSource());
+			//androiddriver.findElement(By.id("tab_img")).click();
+			//androiddriver.findElement(By.xpath("//android.widget.TabWidget[@resource-id='android:id/tabs']/android.widget.FrameLayout[3]/android.widget.RelativeLayout[1]/android.widget.ImageView[1]")).click();
+			//Initialize.androiddriver.findElementById("android:id/tab_img").click();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
